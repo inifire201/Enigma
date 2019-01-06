@@ -15,7 +15,8 @@ class Enigma{
     int rotorset3;
     int reflectorset;
 
-    int translate(int rotor[], int symbolIn){
+    int translate(int rotor[], int symbolIn, int position){
+        //TODO add position functionality
         int pos;
         for(int i=0; rotorRef[i] == symbolIn; i++){
             pos = i;

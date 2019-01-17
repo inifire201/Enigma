@@ -1,5 +1,5 @@
 //here goes all the non phisical techical stuff
-template <size_t rows, size_t cols>
+#define NULL __null
 
 class Enigma{
     //TODO add the rest of these rotors
@@ -26,7 +26,11 @@ class Enigma{
         {22,23}
     };
 
-    int getReflector(int reflector[][], int posA, int posB){
+    int pairs [16][2] = {
+
+    };
+
+    int getReflector(int reflector[][2], int posA, int posB){
         return reflector[posA - 1][posB - 1];
     }
 
@@ -57,15 +61,16 @@ class Enigma{
         }
     }
 
-    int reflect(int reflector[][],int symbolIn){
-        int x[];
+    int reflect(int reflector[][2],int symbolIn){
+        int x[2];
         for(int i = 0; i < 13; i++){
             
             for(int j = 0; j < 2; j++){
                 
                 //looks for the symbol in the reflector
                 if(getReflector(reflector,i,j) == symbolIn){
-                    x = {i,j};
+                    x[0] = i;
+                    x[1] = j;
                     break;
                 }
             }
@@ -80,19 +85,19 @@ class Enigma{
             return getReflector(reflector,x[0],1);
         }
         else{
-            return getReflector(reflector,x[0],0)
+            return getReflector(reflector,x[0],0);
         }
     }
     
-    int encrypt(int rotor1[], int rotor2[], int rotor3[], int reflector[][], int pos1, int pos2, int pos3, int symbolIn){
+    int encrypt(int rotor1[], int rotor2[], int rotor3[], int reflector[][2] ,int pos1, int pos2, int pos3, int symbolIn){
         int symbol;
         symbol = translateIn(rotor1, symbolIn, pos1);
         symbol = translateIn(rotor2, symbol, pos2);
         symbol = translateIn(rotor3, symbol, pos3);
-        symbol = reflect(reflector[][], symbol);
+        symbol = reflect(reflector, symbol);
         symbol = translateOut(rotor3, symbol, pos3);
         symbol = translateOut(rotor2, symbol, pos2);
         return translateOut(rotor1, symbol, pos1);
     }
 
-}
+};
